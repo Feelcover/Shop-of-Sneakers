@@ -1,13 +1,14 @@
 import React from "react";
+import styles from "./Basket.module.scss"
 
 const Basket = () => {
   return (
-    <div className="basketOverlay">
-      <div className="basket">
-        <div className="basketContainer">
+    <div className={styles.basketOverlay}>
+      <div className={styles.basket}>
+        <div className={styles.basketContainer}>
           <h2 className="mb-30 d-flex justify-between">
             Корзина
-            <button className="buttonCloseBasket">
+            <button className={styles.buttonCloseBasket}>
               <img
                 width={40}
                 height={40}
@@ -16,8 +17,9 @@ const Basket = () => {
               ></img>
             </button>
           </h2>
-          <div className="basketItems">
-            <div className="basketItem">
+          <div className={styles.basketItems}>
+
+            <div className={styles.basketItem}>
               <img
                 className="mr-20"
                 width={70}
@@ -32,11 +34,12 @@ const Basket = () => {
                 </p>
                 <b>10999 руб.</b>
               </div>
-              <button className="removeButton mr-5">
-                <img className="removeImg" src="/img/btn-remove.svg"></img>
+              <button className={`${styles.removeButton} mr-5`}>
+                <img className={styles.removeImg} src="/img/btn-remove.svg"></img>
               </button>
             </div>
-            <div className="basketItem">
+
+            <div className={styles.basketItem}>
               <img
                 className="mr-20"
                 width={70}
@@ -51,15 +54,16 @@ const Basket = () => {
                 </p>
                 <b>10999 руб.</b>
               </div>
-              <button className="removeButton mr-5">
-                <img className="removeImg" src="/img/btn-remove.svg"></img>
+              <button className={`${styles.removeButton} mr-5`}>
+                <img className={styles.removeImg} src="/img/btn-remove.svg"></img>
               </button>
             </div>
+
           </div>
         </div>
 
-        <div className="checkout">
-          <ul className="total">
+        <div className={styles.checkout}>
+          <ul className={styles.total}>
             <li>
               <span>Итого:</span>
               <div></div>
@@ -72,7 +76,7 @@ const Basket = () => {
             </li>
           </ul>
 
-          <button className="checkoutButton">
+          <button className={styles.checkoutButton}>
             Оформить заказ
             <img src="/img/arrow.svg" alt="arrow"></img>
           </button>
