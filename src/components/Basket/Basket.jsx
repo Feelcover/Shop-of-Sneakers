@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Basket.module.scss"
 
-const Basket = () => {
+const Basket = ({closeBasket}) => {
   return (
     <div className={styles.basketOverlay}>
       <div className={styles.basket}>
         <div className={styles.basketContainer}>
           <h2 className="mb-30 d-flex justify-between">
             Корзина
-            <button className={styles.buttonCloseBasket}>
+            <button className={styles.buttonCloseBasket}
+            onClick={closeBasket}>
               <img
                 width={40}
                 height={40}

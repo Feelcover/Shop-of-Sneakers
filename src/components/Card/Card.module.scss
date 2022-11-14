@@ -38,6 +38,8 @@
     .like {
       width: 32px;
       height: 32px;
+      border: 1px solid rgba(65, 62, 62, 0.06);
+      border-radius: 8px;
     }
     p {
       margin: 0;
@@ -54,6 +56,7 @@
       font-size: 12px;
     }
     .buttonAdd {
+      position: relative;
       background: #ffffff;
       box-sizing: border-box;
       border-radius: 8px;
@@ -69,6 +72,17 @@
       transform: scale(1.1);
       box-shadow: -1px 1px 1px rgba(65, 62, 62, 0.2);
 
+    }
+    .buttonAddImg{
+      width: 11px;
+      height: 11px;
+    }
+    .buttonAddedImg{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
     }
     }
   }

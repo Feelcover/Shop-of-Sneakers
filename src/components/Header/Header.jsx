@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const Header = ({openModal}) => {
   return (
     <header
       className={`${styles.header} d-flex justify-between align-center p-40`}
@@ -16,7 +16,7 @@ const Header = () => {
 
       <ul className="d-flex align-center">
         <li className="d-flex align-center mr-30">
-          <button>
+          <button onClick={openModal}>
             <img width={18} height={18} src="/img/cart.svg" />
           </button>
           <span>1205 руб.</span>
