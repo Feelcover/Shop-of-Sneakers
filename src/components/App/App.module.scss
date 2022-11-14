@@ -18,11 +18,13 @@
     opacity: 0.8;
     border: 1px solid #f3f3f3;
     border-radius: 10%;
+    max-height: 40px;
+
   
     input {
       border: 0;
       font-size: 16px;
-      padding: 13px;
+      padding: 5px;
       width: 200px;
     }
   }

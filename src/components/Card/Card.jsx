@@ -1,6 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./Card.module.scss";
+import imgUnliked from "../../img/unliked.svg"
+import imgLiked from "../../img/liked.svg"
+import imgPlus from "../../img/plus.svg"
+import imgChecked from "../../img/btn-checked.svg"
+
+
 
 const Card = ({ image, name, price }) => {
   const [added, setAdded] = useState(false);
@@ -18,7 +24,7 @@ const Card = ({ image, name, price }) => {
       <button className={styles.buttonLike} onClick={handleLikedClick}>
         <img
           className={styles.like}
-          src={liked == false ? "/img/unliked.svg" : "/img/liked.svg"}
+          src={liked == false ? imgUnliked : imgLiked}
           alt="like"
         ></img>
       </button>
@@ -36,7 +42,7 @@ const Card = ({ image, name, price }) => {
             }
             width={11}
             height={11}
-            src={added == false ? "/img/plus.svg" : "/img/btn-checked.svg"}
+            src={added == false ? imgPlus : imgChecked}
             alt="img"
           ></img>
         </button>

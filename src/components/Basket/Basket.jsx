@@ -1,5 +1,12 @@
 import React from "react";
 import styles from "./Basket.module.scss"
+import img1 from "../../img/sneakers/1.jpg"
+import imgClose from "../../img/close.png"
+import imgRemove from "../../img/btn-remove.svg"
+import imgArrow from "../../img/arrow.svg"
+
+
+
 
 const Basket = ({closeBasket}) => {
   return (
@@ -13,7 +20,7 @@ const Basket = ({closeBasket}) => {
               <img
                 width={40}
                 height={40}
-                src="/img/close.png"
+                src={imgClose}
                 alt="close"
               ></img>
             </button>
@@ -25,7 +32,7 @@ const Basket = ({closeBasket}) => {
                 className="mr-20"
                 width={70}
                 height={65}
-                src="/img/sneakers/1.jpg"
+                src={img1}
                 alt="sneakers"
               ></img>
 
@@ -36,7 +43,7 @@ const Basket = ({closeBasket}) => {
                 <b>10999 руб.</b>
               </div>
               <button className={`${styles.removeButton} mr-5`}>
-                <img className={styles.removeImg} src="/img/btn-remove.svg"></img>
+                <img className={styles.removeImg} src={imgRemove}></img>
               </button>
             </div>
 
@@ -45,7 +52,7 @@ const Basket = ({closeBasket}) => {
                 className="mr-20"
                 width={70}
                 height={65}
-                src="/img/sneakers/1.jpg"
+                src={img1}
                 alt="sneakers"
               ></img>
 
@@ -56,7 +63,7 @@ const Basket = ({closeBasket}) => {
                 <b>10999 руб.</b>
               </div>
               <button className={`${styles.removeButton} mr-5`}>
-                <img className={styles.removeImg} src="/img/btn-remove.svg"></img>
+                <img className={styles.removeImg} src={imgRemove}></img>
               </button>
             </div>
 
@@ -79,7 +86,7 @@ const Basket = ({closeBasket}) => {
 
           <button className={styles.checkoutButton}>
             Оформить заказ
-            <img src="/img/arrow.svg" alt="arrow"></img>
+            <img src={imgArrow} alt="arrow"></img>
           </button>
         </div>
       </div>

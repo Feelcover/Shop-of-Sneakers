@@ -3,8 +3,9 @@ import { useState } from "react";
 import Basket from "../Basket/Basket";
 import Card from "../Card/Card";
 import Header from "../Header/Header";
-import { data } from "../utils/data";
+import { data } from "../../utils/data";
 import styles from "./App.module.scss";
+import imgSearch from "../../img/search.svg"
 
 function App() {
   const [basketOpen, setBasketOpened] = useState(false);
@@ -21,12 +22,12 @@ function App() {
         ) : null}
         <Header openModal={handleBasketOpened} />
         <div className={`{styles.mainContent} p-40`}>
-          <div className="d-flex justify-between mb-40">
+          <div className="d-flex justify-between align-center mb-40">
             <h1>Все кроссовки</h1>
             <div className={styles.searchContainer}>
               <img
                 className="pr-10 pl-10"
-                src="/img/search.svg"
+                src={imgSearch}
                 alt="search"
               ></img>
               <input className={styles.search} placeholder="Поиск" />
