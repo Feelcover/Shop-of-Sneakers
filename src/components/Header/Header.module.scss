@@ -23,9 +23,13 @@ header {
     transition: all 0.2s ease-in-out;
     transform: 0.2s ease-out;
 
-    &:hover {
+    &:hover{
       opacity: 1;
       transform: scale(1.1);
     }
     }
+    .cartPrice{
+      cursor: pointer;
+    }
+
   }

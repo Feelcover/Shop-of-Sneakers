@@ -13,7 +13,7 @@ const Header = ({openModal}) => {
       className={`${styles.header} d-flex justify-between align-center p-40`}
     >
       <div className="d-flex align-center">
-        <img className="mr-5" width={40} height={40} src={imgLogo} />
+        <img className="mr-5 opacity-9" width={68} height={50} src={imgLogo} />
         <div>
           <h3>SNEAKERS SHOP</h3>
           <p className="opacity-6">Магазин кроссовок</p>
@@ -21,20 +21,21 @@ const Header = ({openModal}) => {
       </div>
 
       <ul className="d-flex align-center">
-        <li className="d-flex align-center mr-30">
-          <button onClick={openModal}>
+        <li className="d-flex align-center mr-30" onClick={openModal}>
+          <button>
             <img width={18} height={18} src={imgCart} />
           </button>
-          <span>1205 руб.</span>
+          <span className={styles.cartPrice}>1205 руб.</span>
+
         </li>
-        <li className="mr-10">
+        <li className="d-flex align-center mr-10">
           <button>
           <img width={18} height={18} src={imgFav} />
 
           </button>
           <span></span>
         </li>
-        <li>
+        <li className="d-flex align-center">
           <button>
           <img width={18} height={18} src={imgUser} />
 

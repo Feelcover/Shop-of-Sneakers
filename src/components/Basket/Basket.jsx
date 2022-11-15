@@ -1,16 +1,27 @@
-import React from "react";
+import { useEffect } from "react"
 import styles from "./Basket.module.scss"
 import img1 from "../../img/sneakers/1.jpg"
 import imgClose from "../../img/close.png"
 import imgRemove from "../../img/btn-remove.svg"
 import imgArrow from "../../img/arrow.svg"
 
-
-
-
 const Basket = ({closeBasket}) => {
+
+  useEffect(() => {
+    function handleEscKeydown(evt) {
+      if (evt.key === "Escape") {
+        closeBasket();
+      }
+    }
+    document.addEventListener("keydown", handleEscKeydown);
+    return () => {
+      document.removeEventListener("keydown", handleEscKeydown);
+    };
+  }, []);
+
+
   return (
-    <div className={styles.basketOverlay}>
+    <div className={styles.basketOverlay} onClick={e => (e.currentTarget === e.target) && closeBasket()}>
       <div className={styles.basket}>
         <div className={styles.basketContainer}>
           <h2 className="mb-30 d-flex justify-between">
