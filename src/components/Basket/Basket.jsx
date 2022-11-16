@@ -1,12 +1,10 @@
-import { useEffect } from "react"
-import styles from "./Basket.module.scss"
-import img1 from "../../img/sneakers/1.jpg"
-import imgClose from "../../img/close.png"
-import imgRemove from "../../img/btn-remove.svg"
-import imgArrow from "../../img/arrow.svg"
+import { useEffect } from "react";
+import styles from "./Basket.module.scss";
+import imgClose from "../../img/close.png";
+import imgArrow from "../../img/arrow.svg";
+import BasketItem from "./BasketItem/BasketItem";
 
-const Basket = ({closeBasket}) => {
-
+const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
   useEffect(() => {
     function handleEscKeydown(evt) {
       if (evt.key === "Escape") {
@@ -19,65 +17,29 @@ const Basket = ({closeBasket}) => {
     };
   }, []);
 
-
   return (
-    <div className={styles.basketOverlay} onClick={e => (e.currentTarget === e.target) && closeBasket()}>
+    <div
+      className={styles.basketOverlay}
+      onClick={(e) => e.currentTarget === e.target && closeBasket()}
+    >
       <div className={styles.basket}>
         <div className={styles.basketContainer}>
           <h2 className="mb-30 d-flex justify-between">
             Корзина
-            <button className={styles.buttonCloseBasket}
-            onClick={closeBasket}>
-              <img
-                width={40}
-                height={40}
-                src={imgClose}
-                alt="close"
-              ></img>
+            <button className={styles.buttonCloseBasket} onClick={closeBasket}>
+              <img width={40} height={40} src={imgClose} alt="close"></img>
             </button>
           </h2>
           <div className={styles.basketItems}>
-
-            <div className={styles.basketItem}>
-              <img
-                className="mr-20"
-                width={70}
-                height={65}
-                src={img1}
-                alt="sneakers"
-              ></img>
-
-              <div className="mr-20">
-                <p className="mb-5">
-                  Мужские Кроссовки Nike Blazer Mid Suede Green
-                </p>
-                <b>10999 руб.</b>
-              </div>
-              <button className={`${styles.removeButton} mr-5`}>
-                <img className={styles.removeImg} src={imgRemove}></img>
-              </button>
-            </div>
-
-            <div className={styles.basketItem}>
-              <img
-                className="mr-20"
-                width={70}
-                height={65}
-                src={img1}
-                alt="sneakers"
-              ></img>
-
-              <div className="mr-20">
-                <p className="mb-5">
-                  Мужские Кроссовки Nike Blazer Mid Suede Green
-                </p>
-                <b>10999 руб.</b>
-              </div>
-              <button className={`${styles.removeButton} mr-5`}>
-                <img className={styles.removeImg} src={imgRemove}></img>
-              </button>
-            </div>
-
+            {basketAddedItems.map((e) => (
+              <BasketItem
+                key={e.image}
+                image={e.image}
+                name={e.name}
+                price={e.price}
+                deleteItem={basketDeleteItems}
+              ></BasketItem>
+            ))}
           </div>
         </div>
 

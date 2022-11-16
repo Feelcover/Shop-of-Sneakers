@@ -1,0 +1,47 @@
+.basketItem {
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid #f3f3f3;
+  overflow: hidden;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  padding: 10px 6px;
+  min-width: 400px;
+  min-height: 95px;
+  transition: all 0.2s ease-out;
+  transform: 0.2s ease-out;
+
+  &:hover {
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.3);
+
+    transform: translateY(-0.2px);
+  }
+
+  p {
+    min-width: 244px;
+    font-size: 14px;
+  }
+  b {
+    font-size: 14px;
+  }
+
+  .removeButton {
+    opacity: 0.85;
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    transform: 0.2s ease-out;
+
+    &:hover {
+        border-radius: 8px;
+      box-shadow: 0px 1px 1px rgba(65, 62, 62, 0.2);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}

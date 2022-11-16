@@ -17,6 +17,7 @@
   
 
   .searchContainer {
+    position: relative;
     display: flex;
     align-items: center;
     opacity: 1;
@@ -37,6 +38,19 @@
         border-color: #bdbdbd;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+      }
+    }
+    .clearSearch{
+      position: absolute;
+      right: 2px;
+      margin: 0 5px 0;
+      width: 20px;
+      height: 20px;
+      opacity: 0.5;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      &:hover{
+        opacity: 0.9;
       }
     }
     
