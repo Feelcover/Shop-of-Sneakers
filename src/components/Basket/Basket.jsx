@@ -17,6 +17,10 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
     };
   }, []);
 
+  // const uniqueArr = (arr) => {
+  //   return Array.from(new Set(arr));
+  // }
+
   return (
     <div
       className={styles.basketOverlay}
@@ -33,11 +37,11 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
           <div className={styles.basketItems}>
             {basketAddedItems.map((e) => (
               <BasketItem
-                key={e.image}
+                key={e.id}
                 image={e.image}
                 name={e.name}
                 price={e.price}
-                deleteItem={basketDeleteItems}
+                deleteItem={()=>basketDeleteItems(e.id)}
               ></BasketItem>
             ))}
           </div>

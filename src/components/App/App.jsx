@@ -7,6 +7,9 @@ import Header from "../Header/Header";
 import styles from "./App.module.scss";
 import imgSearch from "../../img/search.svg";
 import imgClose from "../../img/close.png";
+import axios from "axios"
+import { getBasketItems, getItems } from "../../utils/api";
+
 
 function App() {
   const [items, setItems] = useState([]);
@@ -21,28 +24,27 @@ function App() {
     setBasketOpened(false);
   };
   const handleAddInBasket = (item) => {
+    axios.post("https://6373698a348e9472990bb74f.mockapi.io/Basket", item)
     setBasketItems((prev) => [...prev, item]);
   };
-  const handleDeleteInBasket = (name) => {
-    setBasketItems(basketItems.filter((item) => item.name != name));
+  const handleDeleteInBasket = (id) => {
+    console.log(id);
+    axios.delete(`https://6373698a348e9472990bb74f.mockapi.io/Basket/${id}`)
+    setBasketItems(basketItems.filter((item) => item.id != id));
+
   };
 
   const handleChangeSearchInput = (evt) => {
     setSearchValue(evt.target.value);
   };
-  const handleChangeSearchInputClear = (evt) => {
+  const handleChangeSearchInputClear = () => {
     setSearchValue("");
   };
 
   useEffect(() => {
-    fetch("https://6373698a348e9472990bb74f.mockapi.io/Items")
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setItems(json);
-      });
-  }, []);
+    getItems(setItems)
+    getBasketItems(setBasketItems)     
+    }, []);
 
   function searchFilter(arr) {
     return arr.filter((e) => e.name.toLowerCase().includes(searchValue));
@@ -55,7 +57,7 @@ function App() {
           <Basket
             closeBasket={handleBasketClose}
             basketAddedItems={basketItems}
-            basketDeleteItems={() => handleDeleteInBasket(basketItems.name)}
+            basketDeleteItems={handleDeleteInBasket}
           />
         )}
         <Header openModal={handleBasketOpen} />
@@ -85,9 +87,9 @@ function App() {
             </div>
           </div>
           <div className={styles.cardContainer}>
-            {searchFilter(items).map((e) => (
+            {searchFilter(items).map((e, index) => (
               <Card
-                key={e.image}
+                key={index}
                 image={e.image}
                 name={e.name}
                 price={e.price}
