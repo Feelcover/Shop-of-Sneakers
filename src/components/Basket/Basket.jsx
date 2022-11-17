@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styles from "./Basket.module.scss";
 import imgClose from "../../img/close.png";
 import imgArrow from "../../img/arrow.svg";
+import imgEmpty from "../../img/empty-cart.jpg";
 import BasketItem from "./BasketItem/BasketItem";
 
 const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
@@ -34,6 +35,7 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
               <img width={40} height={40} src={imgClose} alt="close"></img>
             </button>
           </h2>
+          {basketAddedItems.length !== 0 ?
           <div className={styles.basketItems}>
             {basketAddedItems.map((e) => (
               <BasketItem
@@ -45,8 +47,22 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
               ></BasketItem>
             ))}
           </div>
+          :
+          <div className={styles.basketEmpty}>
+            <img className="" src={imgEmpty} alt="Empty" />
+            <h1>Вы ничего не добавили</h1>
+            <h3>Добавьте минимум одну пару, чтобы сделать заказ</h3>
+            <button 
+            className={styles.backToShopButton}
+            onClick={closeBasket}
+            >
+            Вернуться в магазин
+            <img src={imgArrow} alt="arrow"></img>
+          </button>
+          </div>
+          }
         </div>
-
+        {basketAddedItems.length !== 0 &&
         <div className={styles.checkout}>
           <ul className={styles.total}>
             <li>
@@ -66,6 +82,7 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
             <img src={imgArrow} alt="arrow"></img>
           </button>
         </div>
+        }
       </div>
     </div>
   );

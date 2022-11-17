@@ -18,6 +18,7 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
 
   const handleBasketOpen = () => {
+    getBasketItems(setBasketItems)     
     setBasketOpened(true);
   };
   const handleBasketClose = () => {
