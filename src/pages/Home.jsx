@@ -18,7 +18,7 @@ const Home = ({
   return (
     <div className={styles.mainContent}>
       <img className={styles.banner} src={imgBanner} alt="banner" />
-      <div className="d-flex justify-between align-center mb-40 mt-30">
+      <div className={styles.mainContainer}>
         <h1>
           {searchValue ? `Поиск по запросу: ${searchValue}` : "Все кроссовки"}
         </h1>

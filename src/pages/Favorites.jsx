@@ -25,9 +25,9 @@ const Favorites = ({
   return (
     <div className={styles.mainContent}>
       <img className={styles.banner} src={imgBanner} alt="banner" />
-      <div className="d-flex justify-between align-center mb-40 mt-30">
+      <div className={styles.mainContainer}>
         <h1>
-          {searchValue ? `Поиск по запросу: ${searchValue}` : "Все кроссовки"}
+          {searchValue ? `Поиск по запросу: ${searchValue}` : "Закладки"}
         </h1>
         <div className={styles.searchContainer}>
           <img className="pr-10 pl-10" src={imgSearch} alt="search"></img>
