@@ -6,22 +6,39 @@ import imgLiked from "../../img/liked.svg";
 import imgPlus from "../../img/plus.svg";
 import imgChecked from "../../img/btn-checked.svg";
 
-const Card = ({ image, name, price, onAddInBasket }) => {
+const Card = ({
+  image,
+  name,
+  price,
+  onAddInBasket,
+  onAddInFavorites,
+  onDeleteInFavorites,
+}) => {
   const [added, setAdded] = useState(false);
-  const [liked, setliked] = useState(false);
+  const [liked, setLiked] = useState(false);
+
 
   const handleAddClick = () => {
-    if(!added){
-    setAdded(true);
-    onAddInBasket()
-    }else{
-    setAdded(false)
+    if (!added) {
+      setAdded(true);
+      onAddInBasket();
+    } else {
+      setAdded(false);
     }
   };
+
   const handleLikedClick = () => {
-    setliked(!liked);
+    if (!liked) {
+      setLiked(true);
+      onAddInFavorites();
+    } else {
+      setLiked(false);
+      onDeleteInFavorites();
+    }
   };
 
+
+    
   return (
     <div className={styles.card}>
       <button className={styles.buttonLike} onClick={handleLikedClick}>

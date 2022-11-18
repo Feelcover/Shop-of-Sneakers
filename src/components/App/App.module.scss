@@ -9,13 +9,20 @@
   }
 
   .mainContent {
+    padding: 30px 50px;
     box-sizing: border-box;
     h1 {
       margin: 0;
     }
   }
   
-
+  .banner{
+    object-fit: cover;
+    width: 1000px;
+    height: 300px;
+    border-radius: 20px;
+    opacity: 0.9;
+  }
   .searchContainer {
     position: relative;
     display: flex;
@@ -61,7 +68,6 @@
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   max-height: 950px;
   overflow-y: auto;
 
