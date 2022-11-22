@@ -68,7 +68,7 @@ export const getBasketItems = (setFunc) => {
     });
   }
   export const postDeleteInFavorites = (id) => {
-    axios.post(`${Api.url}/Favorites/${id}`)
+    axios.delete(`${Api.url}/Favorites/${id}`)
     .then(function (res) {
       console.log(res.statusText);
     })

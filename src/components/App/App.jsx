@@ -16,6 +16,7 @@ import {
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
+  getFavorites
 } from "../../utils/api";
 
 function App() {
@@ -42,14 +43,19 @@ function App() {
   };
 
   const handleAddInFavorites = (item) => {
-    postAddInFavorite(item)
-    setFavorites((prev) => [...prev, item]);
+    console.log(item.id);
+    if (favorites.find((fav) => fav.id === item.id)){
+    setFavorites((prev) => prev.filter((fav) => fav.id !== item.id));
+    console.log('Уже есть');
+    } else {
+      postAddInFavorite(item)
+      setFavorites((prev) => [...prev, item]);
+    }
   };
-  const handleDeleteInFavorites = (id) => {
-    console.log(id);
 
-    postDeleteInFavorites(id);
-    // setFavorites(favorites.filter((item) => item.id != id));
+  const handleDeleteInFavorites = (item) => {
+    postDeleteInFavorites(item.id);
+    getFavorites(setFavorites);
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -102,8 +108,8 @@ function App() {
           handleChangeSearchInputClear = {handleChangeSearchInputClear}
           searchFilter = {searchFilter}
           handleAddInBasket = {handleAddInBasket}
-          favorites = {favorites}
           handleAddInFavorites = {handleAddInFavorites}
+          favorites = {favorites}
           handleDeleteInFavorites = {handleDeleteInFavorites}
           setFavorites={setFavorites}
           >

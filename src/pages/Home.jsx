@@ -42,12 +42,10 @@ const Home = ({
       </div>
 
       <div className={styles.cardContainer}>
-        {searchFilter(items).map((e, index) => (
+        {searchFilter(items).map((e) => (
           <Card
-            key={index}
-            image={e.image}
-            name={e.name}
-            price={e.price}
+            {...e}
+            key={e.id}
             onAddInBasket={() => handleAddInBasket(e)}
             favList={favorites}
             onAddInFavorites={() => handleAddInFavorites(e)}

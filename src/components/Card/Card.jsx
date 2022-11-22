@@ -13,9 +13,10 @@ const Card = ({
   onAddInBasket,
   onAddInFavorites,
   onDeleteInFavorites,
+  addedInFavorite = false
 }) => {
   const [added, setAdded] = useState(false);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(addedInFavorite);
 
 
   const handleAddClick = () => {
