@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import Header from "../Header/Header";
 import Home from "../../pages/Home";
-import Favorites from "../../pages/Favorites"
+import Favorites from "../../pages/Favorites";
+import Error from "../../pages/Error";
 // import { data } from "../../utils/data";
 import styles from "./App.module.scss";
-
 
 import {
   getBasketItems,
@@ -16,6 +16,7 @@ import {
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
+  getFavorites
 } from "../../utils/api";
 
 function App() {
@@ -25,6 +26,16 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [favorites, setFavorites] = useState([]);
 
+  useEffect(() => {
+    getItems(setItems);
+    getBasketItems(setBasketItems);
+    getFavorites(setFavorites);
+  }, []);
+  console.log(items);
+  console.log(basketItems);
+  console.log(favorites);
+
+
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
     setBasketOpened(true);
@@ -33,8 +44,13 @@ function App() {
     setBasketOpened(false);
   };
   const handleAddInBasket = (item) => {
-    postAddBasketItems(item);
-    setBasketItems((prev) => [...prev, item]);
+    if(basketItems.find((baItem) => baItem.name === item.name)){
+      console.log('Уже есть в корзине')
+    }else{
+      postAddBasketItems(item);
+      setBasketItems((prev) => [...prev, item]);
+    }
+
   };
   const handleDeleteInBasket = (id) => {
     postDeleteBasketItems(id);
@@ -42,19 +58,17 @@ function App() {
   };
 
   const handleAddInFavorites = (item) => {
-    console.log(item.id);
-    if (favorites.find((fav) => fav.id === item.id)){
-    setFavorites((prev) => prev.filter((fav) => fav.id !== item.id));
-    console.log('Уже есть');
+    if (favorites.find((fav) => fav.name === item.name)) {
+      console.log("Уже есть");
     } else {
-      postAddInFavorite(item)
+      postAddInFavorite(item);
       setFavorites((prev) => [...prev, item]);
     }
   };
 
   const handleDeleteInFavorites = (item) => {
     postDeleteInFavorites(item.id);
-    setFavorites((prev) => prev.filter((fav) => fav.id !== item.id));
+    setFavorites(favorites.filter((fav) => fav.name !== item.id));
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -67,10 +81,6 @@ function App() {
     return arr.filter((e) => e.name.toLowerCase().includes(searchValue));
   }
 
-  useEffect(() => {
-    getItems(setItems);
-  }, []);
-
   return (
     <>
       <div className={`${styles.wrapper} clear`}>
@@ -81,39 +91,39 @@ function App() {
             basketDeleteItems={handleDeleteInBasket}
           />
         )}
-        <Header 
-        openModal={handleBasketOpen}
-        setFavorites = {setFavorites}
-        />
+        <Header openModal={handleBasketOpen} setFavorites={setFavorites} />
+        <Switch>
           <Route path="/" exact>
-          <Home
-          items = {items}
-          searchValue = {searchValue}
-          handleChangeSearchInput = {handleChangeSearchInput}
-          handleChangeSearchInputClear = {handleChangeSearchInputClear}
-          searchFilter = {searchFilter}
-          handleAddInBasket = {handleAddInBasket}
-          favorites = {favorites}
-          handleAddInFavorites = {handleAddInFavorites}
-          handleDeleteInFavorites = {handleDeleteInFavorites}
-          
-          />
+            <Home
+              items={items}
+              searchValue={searchValue}
+              handleChangeSearchInput={handleChangeSearchInput}
+              handleChangeSearchInputClear={handleChangeSearchInputClear}
+              searchFilter={searchFilter}
+              handleAddInBasket={handleAddInBasket}
+              favorites={favorites}
+              handleAddInFavorites={handleAddInFavorites}
+              handleDeleteInFavorites={handleDeleteInFavorites}
+            />
           </Route>
           <Route path="/Favorites">
-          <Favorites
-          items = {items}
-          searchValue = {searchValue}
-          handleChangeSearchInput = {handleChangeSearchInput}
-          handleChangeSearchInputClear = {handleChangeSearchInputClear}
-          searchFilter = {searchFilter}
-          handleAddInBasket = {handleAddInBasket}
-          handleAddInFavorites = {handleAddInFavorites}
-          favorites = {favorites}
-          handleDeleteInFavorites = {handleDeleteInFavorites}
-          setFavorites={setFavorites}
-          >
-          </Favorites>
+            <Favorites
+              items={items}
+              searchValue={searchValue}
+              handleChangeSearchInput={handleChangeSearchInput}
+              handleChangeSearchInputClear={handleChangeSearchInputClear}
+              searchFilter={searchFilter}
+              handleAddInBasket={handleAddInBasket}
+              handleAddInFavorites={handleAddInFavorites}
+              favorites={favorites}
+              handleDeleteInFavorites={handleDeleteInFavorites}
+              setFavorites={setFavorites}
+            ></Favorites>
           </Route>
+          <Route>
+            <Error/>
+          </Route>
+        </Switch>
       </div>
     </>
   );

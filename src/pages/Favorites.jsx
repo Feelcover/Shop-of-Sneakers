@@ -5,8 +5,7 @@ import imgBanner from "../img/banner.jpg";
 import imgArrow from "../img/arrow.svg";
 import styles from "../components/App/App.module.scss";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { getFavorites } from "../utils/api";
+
 
 const Favorites = ({
   searchValue,
@@ -15,13 +14,9 @@ const Favorites = ({
   searchFilter,
   handleAddInBasket,
   favorites,
-  setFavorites,
   handleAddInFavorites,
   handleDeleteInFavorites,
 }) => {
-  useEffect(() => {
-    getFavorites(setFavorites);
-  }, []);
 
 
   return (
