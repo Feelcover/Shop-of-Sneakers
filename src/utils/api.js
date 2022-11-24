@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const Api = {
-  url: "https://6373698a348e9472990bb74f.mockapi.io",
+  url: "https://6373698a348e9472990bb74f.mockapi.io"
 };
 
 export const getItems = (setFunc) => {

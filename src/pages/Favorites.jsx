@@ -23,6 +23,7 @@ const Favorites = ({
     getFavorites(setFavorites);
   }, []);
 
+
   return (
     <div className={styles.mainContent}>
       <img className={styles.banner} src={imgBanner} alt="banner" />

@@ -16,7 +16,6 @@ import {
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
-  getFavorites
 } from "../../utils/api";
 
 function App() {
@@ -39,7 +38,7 @@ function App() {
   };
   const handleDeleteInBasket = (id) => {
     postDeleteBasketItems(id);
-    setBasketItems(basketItems.filter((item) => item.id != id));
+    setBasketItems(basketItems.filter((item) => item.id !== id));
   };
 
   const handleAddInFavorites = (item) => {
@@ -55,7 +54,7 @@ function App() {
 
   const handleDeleteInFavorites = (item) => {
     postDeleteInFavorites(item.id);
-    getFavorites(setFavorites);
+    setFavorites((prev) => prev.filter((fav) => fav.id !== item.id));
   };
 
   const handleChangeSearchInput = (evt) => {
