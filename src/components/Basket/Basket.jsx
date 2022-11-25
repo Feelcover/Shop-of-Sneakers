@@ -18,6 +18,8 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
     };
   }, []);
 
+  
+
   // const uniqueArr = (arr) => {
   //   return Array.from(new Set(arr));
   // }

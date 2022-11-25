@@ -16,7 +16,7 @@ import {
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
-  getFavorites
+  getFavorites,
 } from "../../utils/api";
 
 function App() {
@@ -31,10 +31,6 @@ function App() {
     getBasketItems(setBasketItems);
     getFavorites(setFavorites);
   }, []);
-  console.log(items);
-  console.log(basketItems);
-  console.log(favorites);
-
 
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
@@ -44,13 +40,11 @@ function App() {
     setBasketOpened(false);
   };
   const handleAddInBasket = (item) => {
-    if(basketItems.find((baItem) => baItem.name === item.name)){
-      console.log('Уже есть в корзине')
-    }else{
+    if (basketItems.find((baItem) => baItem.name === item.name)) {
+    } else {
       postAddBasketItems(item);
       setBasketItems((prev) => [...prev, item]);
     }
-
   };
   const handleDeleteInBasket = (id) => {
     postDeleteBasketItems(id);
@@ -59,16 +53,15 @@ function App() {
 
   const handleAddInFavorites = (item) => {
     if (favorites.find((fav) => fav.name === item.name)) {
-      console.log("Уже есть");
     } else {
       postAddInFavorite(item);
       setFavorites((prev) => [...prev, item]);
     }
   };
 
-  const handleDeleteInFavorites = (item) => {
-    postDeleteInFavorites(item.id);
-    setFavorites(favorites.filter((fav) => fav.name !== item.id));
+  const handleDeleteInFavorites = (id) => {
+    postDeleteInFavorites(id);
+    setFavorites(favorites.filter((fav) => fav.id !== id));
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -95,19 +88,24 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Home
+              basketItems={basketItems}
               items={items}
               searchValue={searchValue}
               handleChangeSearchInput={handleChangeSearchInput}
               handleChangeSearchInputClear={handleChangeSearchInputClear}
               searchFilter={searchFilter}
               handleAddInBasket={handleAddInBasket}
-              favorites={favorites}
+              handleDeleteInBasket={handleDeleteInBasket}
               handleAddInFavorites={handleAddInFavorites}
               handleDeleteInFavorites={handleDeleteInFavorites}
+              favorites={favorites}
+              setFavorites={setFavorites}
             />
           </Route>
-          <Route path="/Favorites">
+          <Route path="/Favorites" exact>
             <Favorites
+              setFavorites={setFavorites}
+              basketItems={basketItems}
               items={items}
               searchValue={searchValue}
               handleChangeSearchInput={handleChangeSearchInput}
@@ -115,13 +113,13 @@ function App() {
               searchFilter={searchFilter}
               handleAddInBasket={handleAddInBasket}
               handleAddInFavorites={handleAddInFavorites}
+              handleDeleteInBasket={handleDeleteInBasket}
               favorites={favorites}
               handleDeleteInFavorites={handleDeleteInFavorites}
-              setFavorites={setFavorites}
             ></Favorites>
           </Route>
           <Route>
-            <Error/>
+            <Error />
           </Route>
         </Switch>
       </div>

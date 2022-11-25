@@ -5,6 +5,7 @@ import imgUnliked from "../../img/unliked.svg";
 import imgLiked from "../../img/liked.svg";
 import imgPlus from "../../img/plus.svg";
 import imgChecked from "../../img/btn-checked.svg";
+import { useEffect } from "react";
 
 const Card = ({
   image,
@@ -13,11 +14,13 @@ const Card = ({
   onAddInBasket,
   onAddInFavorites,
   onDeleteInFavorites,
-  addedInFavorite = false
+  onDeleteInBasket,
+  basketItems=[],
+  favList=[],
 }) => {
-  const [added, setAdded] = useState(false);
-  const [liked, setLiked] = useState(addedInFavorite);
 
+  const [added, setAdded] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   const handleAddClick = () => {
     if (!added) {
@@ -25,6 +28,7 @@ const Card = ({
       onAddInBasket();
     } else {
       setAdded(false);
+      onDeleteInBasket();
     }
   };
 
@@ -38,8 +42,22 @@ const Card = ({
     }
   };
 
+  const isAdded = (name) => {
+    if (basketItems.find((baItem) => baItem.name === name)) {
+      setAdded(true)
+    }
+  }
+  const isLiked = (name) => {
+    if (favList.find((favItem) => favItem.name === name)) {
+      setLiked(true)
+    }
+  }
 
-    
+  useEffect(()=>{
+    isLiked(name); 
+    isAdded(name);
+  },[])
+
   return (
     <div className={styles.card}>
       <button className={styles.buttonLike} onClick={handleLikedClick}>

@@ -5,16 +5,19 @@ import imgBanner from "../img/banner.jpg";
 import styles from "../components/App/App.module.scss";
 
 const Home = ({
-  items,
+  items=[],
   searchValue,
   handleChangeSearchInput,
   handleChangeSearchInputClear,
   searchFilter,
   handleAddInBasket,
-  favorites,
   handleAddInFavorites,
   handleDeleteInFavorites,
+  handleDeleteInBasket,
+  basketItems=[],
+  favorites=[]
 }) => {
+
   return (
     <div className={styles.mainContent}>
       <img className={styles.banner} src={imgBanner} alt="banner" />
@@ -44,12 +47,14 @@ const Home = ({
       <div className={styles.cardContainer}>
         {searchFilter(items).map((e) => (
           <Card
+            favList={favorites}
+            basketItems={basketItems}
             {...e}
             key={e.id}
             onAddInBasket={() => handleAddInBasket(e)}
-            favList={favorites}
+            onDeleteInBasket={() => handleDeleteInBasket(e.id)}
             onAddInFavorites={() => handleAddInFavorites(e)}
-            onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+            onDeleteInFavorites={() => handleDeleteInFavorites(e.id)}
           ></Card>
         ))}
       </div>
