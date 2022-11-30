@@ -1,4 +1,5 @@
 import React from "react";
+import ContentLoader from "react-content-loader";
 import { useState } from "react";
 import styles from "./Card.module.scss";
 import imgUnliked from "../../img/unliked.svg";
@@ -15,10 +16,10 @@ const Card = ({
   onAddInFavorites,
   onDeleteInFavorites,
   onDeleteInBasket,
-  basketItems=[],
-  favList=[],
+  basketItems = [],
+  favList = [],
+  isLoading,
 }) => {
-
   const [added, setAdded] = useState(false);
   const [liked, setLiked] = useState(false);
 
@@ -27,8 +28,8 @@ const Card = ({
       setAdded(true);
       onAddInBasket();
     } else {
-      setAdded(false);
-      onDeleteInBasket();
+      // setAdded(false);
+      // onDeleteInBasket();
     }
   };
 
@@ -44,46 +45,65 @@ const Card = ({
 
   const isAdded = (name) => {
     if (basketItems.find((baItem) => baItem.name === name)) {
-      setAdded(true)
+      setAdded(true);
     }
-  }
+  };
   const isLiked = (name) => {
     if (favList.find((favItem) => favItem.name === name)) {
-      setLiked(true)
+      setLiked(true);
     }
-  }
+  };
 
-  useEffect(()=>{
-    isLiked(name); 
+  useEffect(() => {
+    isLiked(name);
     isAdded(name);
-  },[])
+  }, []);
 
   return (
     <div className={styles.card}>
-      <button className={styles.buttonLike} onClick={handleLikedClick}>
-        <img
-          className={styles.like}
-          src={liked ? imgLiked : imgUnliked}
-          alt="like"
-        ></img>
-      </button>
-      <img width={156} height={140} src={image} alt="sneakers"></img>
-      <h5>{name}</h5>
-      <div className="d-flex justify-between align-center">
-        <div className="d-flex flex-column">
-          <p className="pt-10">Цена:</p>
-          <b>{price} руб.</b>
-        </div>
-        <button className={styles.buttonAdd} onClick={handleAddClick}>
-          <img
-            className={added ? styles.buttonAddedImg : styles.buttonAddImg}
-            width={11}
-            height={11}
-            src={added ? imgChecked : imgPlus}
-            alt="img"
-          ></img>
-        </button>
-      </div>
+      {isLoading ? (
+        <ContentLoader
+          speed={2}
+          width={150}
+          height={235}
+          viewBox="0 0 150 235"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="0" y="3" rx="10" ry="10" width="150" height="155" />
+          <rect x="0" y="167" rx="5" ry="5" width="150" height="31" />
+          <rect x="0" y="211" rx="5" ry="5" width="100" height="25" />
+          <rect x="125" y="211" rx="5" ry="5" width="25" height="25" />
+        </ContentLoader>
+      ) : (
+        <>
+          <button className={styles.buttonLike} onClick={handleLikedClick}>
+            <img
+              className={styles.like}
+              src={liked ? imgLiked : imgUnliked}
+              alt="like"
+            ></img>
+          </button>
+          <img width={156} height={140} src={image} alt="sneakers"></img>
+          <h5>{name}</h5>
+          <div className="d-flex justify-between align-center">
+            <div className="d-flex flex-column">
+              <p className="pt-10">Цена:</p>
+              <b>{price} руб.</b>
+            </div>
+
+            <button className={styles.buttonAdd} onClick={handleAddClick}>
+              <img
+                className={added ? styles.buttonAddedImg : styles.buttonAddImg}
+                width={11}
+                height={11}
+                src={added ? imgChecked : imgPlus}
+                alt="img"
+              ></img>
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

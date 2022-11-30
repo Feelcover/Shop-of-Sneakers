@@ -45,7 +45,7 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
                 image={e.image}
                 name={e.name}
                 price={e.price}
-                deleteItem={()=>basketDeleteItems(e.id)}
+                deleteItem={()=>basketDeleteItems(e)}
               ></BasketItem>
             ))}
           </div>

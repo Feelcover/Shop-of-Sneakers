@@ -76,3 +76,10 @@ export const getBasketItems = async (setFunc) => {
       console.log(error);
     });
   }
+
+
+  export const allGet = async (setBasketItems, setFavorites, setItems) => {
+    await getBasketItems(setBasketItems);
+    await getFavorites(setFavorites);
+    await getItems(setItems);
+  }

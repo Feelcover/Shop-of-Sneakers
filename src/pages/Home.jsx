@@ -5,7 +5,7 @@ import imgBanner from "../img/banner.jpg";
 import styles from "../components/App/App.module.scss";
 
 const Home = ({
-  items=[],
+  items = [],
   searchValue,
   handleChangeSearchInput,
   handleChangeSearchInputClear,
@@ -14,9 +14,50 @@ const Home = ({
   handleAddInFavorites,
   handleDeleteInFavorites,
   handleDeleteInBasket,
-  basketItems=[],
-  favorites=[]
+  basketItems = [],
+  favorites = [],
+  isLoading,
 }) => {
+
+  const renderItems = () => {
+    const filterItems = searchFilter(items);
+    // if (isLoading) {
+    //   return [...Array(4)].map((e, index) => (
+    //     <Card
+    //       key={index}
+    //       isLoading={isLoading}
+    //     ></Card>
+    //   ));
+    // } else {
+    //   return filterItems.map((e) => (
+    //     <Card
+    //       favList={favorites}
+    //       basketItems={basketItems}
+    //       {...e}
+    //       key={e.id}
+    //       onAddInBasket={() => handleAddInBasket(e)}
+    //       onDeleteInBasket={() => handleDeleteInBasket(e)}
+    //       onAddInFavorites={() => handleAddInFavorites(e)}
+    //       onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+    //       isLoading={isLoading}
+    //     ></Card>
+    //   ));
+    // }
+
+    return (isLoading ? [...Array(4)] : filterItems).map((e, index) => (
+        <Card
+          favList={favorites}
+          basketItems={basketItems}
+          {...e}
+          key={index}
+          onAddInBasket={() => handleAddInBasket(e)}
+          onDeleteInBasket={() => handleDeleteInBasket(e)}
+          onAddInFavorites={() => handleAddInFavorites(e)}
+          onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+          isLoading={isLoading}
+        ></Card>
+      ));
+  };
 
   return (
     <div className={styles.mainContent}>
@@ -44,20 +85,7 @@ const Home = ({
         </div>
       </div>
 
-      <div className={styles.cardContainer}>
-        {searchFilter(items).map((e) => (
-          <Card
-            favList={favorites}
-            basketItems={basketItems}
-            {...e}
-            key={e.id}
-            onAddInBasket={() => handleAddInBasket(e)}
-            onDeleteInBasket={() => handleDeleteInBasket(e.id)}
-            onAddInFavorites={() => handleAddInFavorites(e)}
-            onDeleteInFavorites={() => handleDeleteInFavorites(e.id)}
-          ></Card>
-        ))}
-      </div>
+      <div className={styles.cardContainer}>{renderItems()}</div>
     </div>
   );
 };

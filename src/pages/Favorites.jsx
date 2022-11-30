@@ -72,8 +72,8 @@ const Favorites = ({
             onAddInBasket={() => handleAddInBasket(e)}
             favList={favorites}
             onAddInFavorites={() => handleAddInFavorites(e)}
-            onDeleteInFavorites={() => handleDeleteInFavorites(e.id)}
-            onDeleteInBasket={() => handleDeleteInBasket(e.id)}
+            onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+            onDeleteInBasket={() => handleDeleteInBasket(e)}
             
           ></Card>
         ))}

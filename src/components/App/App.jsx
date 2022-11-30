@@ -11,12 +11,11 @@ import styles from "./App.module.scss";
 
 import {
   getBasketItems,
-  getItems,
   postAddBasketItems,
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
-  getFavorites,
+  allGet
 } from "../../utils/api";
 
 function App() {
@@ -25,12 +24,18 @@ function App() {
   const [basketOpen, setBasketOpened] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    getItems(setItems);
-    getBasketItems(setBasketItems);
-    getFavorites(setFavorites);
+    async function getData() {
+      await allGet(setBasketItems, setFavorites, setItems); 
+      setIsLoading(false)
+    }
+    getData()
   }, []);
+
+
+ 
 
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
@@ -41,27 +46,34 @@ function App() {
   };
   const handleAddInBasket = (item) => {
     if (basketItems.find((baItem) => baItem.name === item.name)) {
+      console.log('есть в корзине');
     } else {
       postAddBasketItems(item);
       setBasketItems((prev) => [...prev, item]);
     }
   };
-  const handleDeleteInBasket = (id) => {
-    postDeleteBasketItems(id);
-    setBasketItems(basketItems.filter((item) => item.id !== id));
+
+  const handleDeleteInBasket = (item) => {
+    postDeleteBasketItems(item.id);
+    setBasketItems(basketItems.filter((baItem) => baItem.id !== item.id));
   };
+
+
+ 
+
 
   const handleAddInFavorites = (item) => {
     if (favorites.find((fav) => fav.name === item.name)) {
+      console.log('есть в закладках');
     } else {
       postAddInFavorite(item);
       setFavorites((prev) => [...prev, item]);
     }
   };
 
-  const handleDeleteInFavorites = (id) => {
-    postDeleteInFavorites(id);
-    setFavorites(favorites.filter((fav) => fav.id !== id));
+  const handleDeleteInFavorites = (item) => {
+    postDeleteInFavorites(item.id);
+    setFavorites(favorites.filter((fav) => fav.id !== item.id));
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -100,6 +112,7 @@ function App() {
               handleDeleteInFavorites={handleDeleteInFavorites}
               favorites={favorites}
               setFavorites={setFavorites}
+              isLoading={isLoading}
             />
           </Route>
           <Route path="/Favorites" exact>
