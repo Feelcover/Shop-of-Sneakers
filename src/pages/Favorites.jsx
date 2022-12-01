@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import Card from "../components/Card/Card";
 import imgSearch from "../img/search.svg";
 import imgClose from "../img/close.png";
@@ -6,24 +6,25 @@ import imgBanner from "../img/banner.jpg";
 import imgArrow from "../img/arrow.svg";
 import styles from "../components/App/App.module.scss";
 import { Link } from "react-router-dom";
+import AppContext from "../utils/data";
 
-const Favorites = ({
-  searchValue,
-  handleChangeSearchInput,
-  handleChangeSearchInputClear,
-  searchFilter,
-  handleAddInBasket,
-  favorites=[],
-  handleAddInFavorites,
-  handleDeleteInFavorites,
-  handleDeleteInBasket,
-  basketItems=[],
-  setFavorites
-}) => {
+const Favorites = () => {
+  const {
+    favorites,
+    handleChangeSearchInput,
+    handleChangeSearchInputClear,
+    searchValue,
+    searchFilter,
+    handleAddInBasket,
+    handleAddInFavorites,
+    handleDeleteInFavorites,
+    handleDeleteInBasket,
+    setFavorites,
+  } = useContext(AppContext);
 
-  useEffect(()=>{
-    setFavorites(favorites)
-  },[])
+  useEffect(() => {
+    setFavorites(favorites);
+  }, []);
 
   return (
     <div className={styles.mainContent}>
@@ -66,7 +67,6 @@ const Favorites = ({
         )}
         {searchFilter(favorites).map((e) => (
           <Card
-            basketItems={basketItems}
             {...e}
             key={e.id}
             onAddInBasket={() => handleAddInBasket(e)}
@@ -74,7 +74,6 @@ const Favorites = ({
             onAddInFavorites={() => handleAddInFavorites(e)}
             onDeleteInFavorites={() => handleDeleteInFavorites(e)}
             onDeleteInBasket={() => handleDeleteInBasket(e)}
-            
           ></Card>
         ))}
       </div>

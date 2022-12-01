@@ -6,6 +6,9 @@ import nk7 from "../img/sneakers/5.jpg";
 import nlx from "../img/sneakers/6.jpg";
 import nsdhp from "../img/sneakers/7.jpg";
 import nkbl from "../img/sneakers/8.jpg";
+import { createContext } from "react";
+
+const AppContext = createContext({});
 
 export const data = [
   {
@@ -57,3 +60,6 @@ export const data = [
     price: 17000,
   },
 ];
+
+
+export default AppContext

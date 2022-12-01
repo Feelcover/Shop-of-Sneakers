@@ -8,14 +8,14 @@ import Favorites from "../../pages/Favorites";
 import Error from "../../pages/Error";
 // import { data } from "../../utils/data";
 import styles from "./App.module.scss";
-
+import AppContext from "../../utils/data";
 import {
   getBasketItems,
   postAddBasketItems,
   postAddInFavorite,
   postDeleteBasketItems,
   postDeleteInFavorites,
-  allGet
+  allGet,
 } from "../../utils/api";
 
 function App() {
@@ -24,18 +24,15 @@ function App() {
   const [basketOpen, setBasketOpened] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [favorites, setFavorites] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
-      await allGet(setBasketItems, setFavorites, setItems); 
-      setIsLoading(false)
+      await allGet(setBasketItems, setFavorites, setItems);
+      setIsLoading(false);
     }
-    getData()
+    getData();
   }, []);
-
-
- 
 
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
@@ -46,25 +43,41 @@ function App() {
   };
   const handleAddInBasket = (item) => {
     if (basketItems.find((baItem) => baItem.name === item.name)) {
-      console.log('есть в корзине');
+      console.log("есть в корзине");
     } else {
       postAddBasketItems(item);
       setBasketItems((prev) => [...prev, item]);
     }
   };
 
+
+  // // Удаление из корзины через страницу
+
+  // function getId(array, item) {
+  //   const value = array.filter(((e) => e.name === item.name));
+  //   let obj = value[0];
+  //   return obj.id
+  // }
+
+  // const handleDeleteInBasketAtHome = (item) => {
+  //   if (isAdded(item.name)){
+  //   const id = getId(basketItems, item); 
+  //   console.log(id);
+  //   postDeleteBasketItems(id);
+  //   setBasketItems(basketItems.filter((baItem) => baItem.name !== item.name));
+  //   }
+  // };
+
+  
+  // Удаление из корзины
   const handleDeleteInBasket = (item) => {
     postDeleteBasketItems(item.id);
     setBasketItems(basketItems.filter((baItem) => baItem.id !== item.id));
   };
 
-
- 
-
-
   const handleAddInFavorites = (item) => {
     if (favorites.find((fav) => fav.name === item.name)) {
-      console.log('есть в закладках');
+      console.log("есть в закладках");
     } else {
       postAddInFavorite(item);
       setFavorites((prev) => [...prev, item]);
@@ -86,57 +99,54 @@ function App() {
     return arr.filter((e) => e.name.toLowerCase().includes(searchValue));
   }
 
+  const isAdded = (name) => {
+    return basketItems.find((baItem) => baItem.name === name);
+  };
+
+  const isFavorite = (name) => {
+    return favorites.find((favItem) => favItem.name === name);
+  };
+
   return (
-    <>
+    <AppContext.Provider
+      value={{
+        items,
+        basketItems,
+        favorites,
+        isAdded,
+        isFavorite,
+        handleChangeSearchInput,
+        handleChangeSearchInputClear,
+        searchFilter,
+        handleAddInBasket,
+        handleDeleteInBasket,
+        handleAddInFavorites,
+        handleDeleteInFavorites,
+        setFavorites,
+        searchValue
+      }}
+    >
       <div className={`${styles.wrapper} clear`}>
         {basketOpen && (
           <Basket
             closeBasket={handleBasketClose}
-            basketAddedItems={basketItems}
             basketDeleteItems={handleDeleteInBasket}
           />
         )}
-        <Header openModal={handleBasketOpen} setFavorites={setFavorites} />
+        <Header openModal={handleBasketOpen} />
         <Switch>
           <Route path="/" exact>
-            <Home
-              basketItems={basketItems}
-              items={items}
-              searchValue={searchValue}
-              handleChangeSearchInput={handleChangeSearchInput}
-              handleChangeSearchInputClear={handleChangeSearchInputClear}
-              searchFilter={searchFilter}
-              handleAddInBasket={handleAddInBasket}
-              handleDeleteInBasket={handleDeleteInBasket}
-              handleAddInFavorites={handleAddInFavorites}
-              handleDeleteInFavorites={handleDeleteInFavorites}
-              favorites={favorites}
-              setFavorites={setFavorites}
-              isLoading={isLoading}
-            />
+            <Home isLoading={isLoading} />
           </Route>
           <Route path="/Favorites" exact>
-            <Favorites
-              setFavorites={setFavorites}
-              basketItems={basketItems}
-              items={items}
-              searchValue={searchValue}
-              handleChangeSearchInput={handleChangeSearchInput}
-              handleChangeSearchInputClear={handleChangeSearchInputClear}
-              searchFilter={searchFilter}
-              handleAddInBasket={handleAddInBasket}
-              handleAddInFavorites={handleAddInFavorites}
-              handleDeleteInBasket={handleDeleteInBasket}
-              favorites={favorites}
-              handleDeleteInFavorites={handleDeleteInFavorites}
-            ></Favorites>
+            <Favorites></Favorites>
           </Route>
           <Route>
             <Error />
           </Route>
         </Switch>
       </div>
-    </>
+    </AppContext.Provider>
   );
 }
 

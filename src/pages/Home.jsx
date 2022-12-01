@@ -1,62 +1,38 @@
+import React from "react";
 import Card from "../components/Card/Card";
 import imgSearch from "../img/search.svg";
 import imgClose from "../img/close.png";
 import imgBanner from "../img/banner.jpg";
 import styles from "../components/App/App.module.scss";
+import AppContext from "../utils/data";
 
-const Home = ({
-  items = [],
-  searchValue,
-  handleChangeSearchInput,
-  handleChangeSearchInputClear,
-  searchFilter,
-  handleAddInBasket,
-  handleAddInFavorites,
-  handleDeleteInFavorites,
-  handleDeleteInBasket,
-  basketItems = [],
-  favorites = [],
-  isLoading,
-}) => {
+const Home = ({ isLoading }) => {
+  const {
+    items,
+    handleChangeSearchInput,
+    handleChangeSearchInputClear,
+    searchValue,
+    searchFilter,
+    handleAddInBasket,
+    handleAddInFavorites,
+    handleDeleteInFavorites,
+    handleDeleteInBasket
+  } = React.useContext(AppContext);
 
   const renderItems = () => {
     const filterItems = searchFilter(items);
-    // if (isLoading) {
-    //   return [...Array(4)].map((e, index) => (
-    //     <Card
-    //       key={index}
-    //       isLoading={isLoading}
-    //     ></Card>
-    //   ));
-    // } else {
-    //   return filterItems.map((e) => (
-    //     <Card
-    //       favList={favorites}
-    //       basketItems={basketItems}
-    //       {...e}
-    //       key={e.id}
-    //       onAddInBasket={() => handleAddInBasket(e)}
-    //       onDeleteInBasket={() => handleDeleteInBasket(e)}
-    //       onAddInFavorites={() => handleAddInFavorites(e)}
-    //       onDeleteInFavorites={() => handleDeleteInFavorites(e)}
-    //       isLoading={isLoading}
-    //     ></Card>
-    //   ));
-    // }
 
-    return (isLoading ? [...Array(4)] : filterItems).map((e, index) => (
-        <Card
-          favList={favorites}
-          basketItems={basketItems}
-          {...e}
-          key={index}
-          onAddInBasket={() => handleAddInBasket(e)}
-          onDeleteInBasket={() => handleDeleteInBasket(e)}
-          onAddInFavorites={() => handleAddInFavorites(e)}
-          onDeleteInFavorites={() => handleDeleteInFavorites(e)}
-          isLoading={isLoading}
-        ></Card>
-      ));
+    return (isLoading ? [...Array(8)] : filterItems).map((e, index) => (
+      <Card
+        {...e}
+        key={index}
+        onAddInBasket={() => handleAddInBasket(e)}
+        onDeleteInBasket={() => handleDeleteInBasket(e)}
+        onAddInFavorites={() => handleAddInFavorites(e)}
+        onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+        isLoading={isLoading}
+      ></Card>
+    ));
   };
 
   return (

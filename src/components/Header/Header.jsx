@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getFavorites } from "../../utils/api";
 import styles from "./Header.module.scss";
 import imgLogo from "../../img/logo.png"
 import imgCart from "../../img/cart.svg"
@@ -10,6 +9,7 @@ import imgUser from "../../img/user.svg"
 
 
 const Header = ({openModal}) => {
+
   return (
     <header
       className={`${styles.header} d-flex justify-between align-center p-40`}

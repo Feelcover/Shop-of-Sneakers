@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import styles from "./Basket.module.scss";
 import imgClose from "../../img/close.png";
 import imgArrow from "../../img/arrow.svg";
 import imgEmpty from "../../img/empty-cart.jpg";
 import BasketItem from "./BasketItem/BasketItem";
+import AppContext from "../../utils/data";
 
-const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
+const Basket = ({ closeBasket, basketDeleteItems}) => {
+
+  const { basketItems }  = useContext(AppContext);
+
   useEffect(() => {
     function handleEscKeydown(evt) {
       if (evt.key === "Escape") {
@@ -17,12 +21,6 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
       document.removeEventListener("keydown", handleEscKeydown);
     };
   }, []);
-
-  
-
-  // const uniqueArr = (arr) => {
-  //   return Array.from(new Set(arr));
-  // }
 
   return (
     <div
@@ -37,9 +35,9 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
               <img width={40} height={40} src={imgClose} alt="close"></img>
             </button>
           </h2>
-          {basketAddedItems.length !== 0 ?
+          {basketItems.length !== 0 ?
           <div className={styles.basketItems}>
-            {basketAddedItems.map((e) => (
+            {basketItems.map((e) => (
               <BasketItem
                 key={e.id}
                 image={e.image}
@@ -64,7 +62,7 @@ const Basket = ({ closeBasket, basketAddedItems = [], basketDeleteItems}) => {
           </div>
           }
         </div>
-        {basketAddedItems.length !== 0 &&
+        {basketItems.length !== 0 &&
         <div className={styles.checkout}>
           <ul className={styles.total}>
             <li>

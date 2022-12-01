@@ -6,7 +6,8 @@ import imgUnliked from "../../img/unliked.svg";
 import imgLiked from "../../img/liked.svg";
 import imgPlus from "../../img/plus.svg";
 import imgChecked from "../../img/btn-checked.svg";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import AppContext from "../../utils/data";
 
 const Card = ({
   image,
@@ -16,48 +17,27 @@ const Card = ({
   onAddInFavorites,
   onDeleteInFavorites,
   onDeleteInBasket,
-  basketItems = [],
-  favList = [],
   isLoading,
 }) => {
-  const [added, setAdded] = useState(false);
-  const [liked, setLiked] = useState(false);
+  
+  const {isAdded, isFavorite, basketItems} = useContext(AppContext);
 
   const handleAddClick = () => {
-    if (!added) {
-      setAdded(true);
-      onAddInBasket();
+    if (isAdded(name)) {
+      onDeleteInBasket();
     } else {
-      // setAdded(false);
-      // onDeleteInBasket();
+      onAddInBasket();
     }
   };
 
   const handleLikedClick = () => {
-    if (!liked) {
-      setLiked(true);
-      onAddInFavorites();
-    } else {
-      setLiked(false);
+    if (isFavorite(name)) {
       onDeleteInFavorites();
+    } else {
+      onAddInFavorites();
     }
   };
 
-  const isAdded = (name) => {
-    if (basketItems.find((baItem) => baItem.name === name)) {
-      setAdded(true);
-    }
-  };
-  const isLiked = (name) => {
-    if (favList.find((favItem) => favItem.name === name)) {
-      setLiked(true);
-    }
-  };
-
-  useEffect(() => {
-    isLiked(name);
-    isAdded(name);
-  }, []);
 
   return (
     <div className={styles.card}>
@@ -80,7 +60,7 @@ const Card = ({
           <button className={styles.buttonLike} onClick={handleLikedClick}>
             <img
               className={styles.like}
-              src={liked ? imgLiked : imgUnliked}
+              src={isFavorite(name) ? imgLiked : imgUnliked}
               alt="like"
             ></img>
           </button>
@@ -94,10 +74,10 @@ const Card = ({
 
             <button className={styles.buttonAdd} onClick={handleAddClick}>
               <img
-                className={added ? styles.buttonAddedImg : styles.buttonAddImg}
+                className={isAdded(name) ? styles.buttonAddedImg : styles.buttonAddImg}
                 width={11}
                 height={11}
-                src={added ? imgChecked : imgPlus}
+                src={isAdded(name) ? imgChecked : imgPlus}
                 alt="img"
               ></img>
             </button>
