@@ -6,7 +6,7 @@ import imgUnliked from "../../img/unliked.svg";
 import imgLiked from "../../img/liked.svg";
 import imgPlus from "../../img/plus.svg";
 import imgChecked from "../../img/btn-checked.svg";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import AppContext from "../../utils/data";
 
 const Card = ({
@@ -16,26 +16,23 @@ const Card = ({
   onAddInBasket,
   onAddInFavorites,
   onDeleteInFavorites,
-  onDeleteInBasket,
+  // onDeleteInBasket,
   isLoading,
 }) => {
   
-  const {isAdded, isFavorite, basketItems} = useContext(AppContext);
+  const {isAdded, isFavorite} = useContext(AppContext);
 
   const handleAddClick = () => {
-    if (isAdded(name)) {
-      onDeleteInBasket();
-    } else {
+    if (!isAdded(name)) {
       onAddInBasket();
-    }
+    } 
   };
 
   const handleLikedClick = () => {
-    if (isFavorite(name)) {
-      onDeleteInFavorites();
-    } else {
+    if (!isFavorite(name)) {
       onAddInFavorites();
-    }
+    } 
+    onDeleteInFavorites();
   };
 
 

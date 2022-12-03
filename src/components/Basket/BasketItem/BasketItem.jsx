@@ -4,6 +4,7 @@ import styles from "./BasketItem.module.scss"
 
 
 const BasketItem = ({image, name, price, deleteItem}) => {
+
   return (
     <div className={styles.basketItem}>
       <img

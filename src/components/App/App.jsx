@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Basket from "../Basket/Basket";
@@ -16,6 +16,8 @@ import {
   postDeleteBasketItems,
   postDeleteInFavorites,
   allGet,
+  getFavorites,
+  getItems
 } from "../../utils/api";
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
     getData();
   }, []);
 
+
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
     setBasketOpened(true);
@@ -51,13 +54,15 @@ function App() {
   };
 
 
-  // // Удаление из корзины через страницу
+  
 
-  // function getId(array, item) {
-  //   const value = array.filter(((e) => e.name === item.name));
-  //   let obj = value[0];
-  //   return obj.id
-  // }
+  function getId(array, item) {
+    const value = array.filter(((e) => e.name === item.name));
+    let obj = value[0];
+    return obj.id
+  }
+
+  // Удаление из корзины через страницу
 
   // const handleDeleteInBasketAtHome = (item) => {
   //   if (isAdded(item.name)){
@@ -66,6 +71,9 @@ function App() {
   //   postDeleteBasketItems(id);
   //   setBasketItems(basketItems.filter((baItem) => baItem.name !== item.name));
   //   }
+
+  //   getBasketItems(setBasketItems)
+
   // };
 
   
@@ -76,7 +84,7 @@ function App() {
   };
 
   const handleAddInFavorites = (item) => {
-    if (favorites.find((fav) => fav.name === item.name)) {
+    if (favorites.some((fav) => fav.name === item.name)) {
       console.log("есть в закладках");
     } else {
       postAddInFavorite(item);
@@ -85,8 +93,12 @@ function App() {
   };
 
   const handleDeleteInFavorites = (item) => {
-    postDeleteInFavorites(item.id);
-    setFavorites(favorites.filter((fav) => fav.id !== item.id));
+    if (isFavorite(item.name)){
+        const id = getId(favorites, item); 
+        console.log(id);
+        postDeleteInFavorites(item.id);
+        setFavorites(favorites.filter((favItem) => favItem.name !== item.name));
+        }
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -123,7 +135,10 @@ function App() {
         handleAddInFavorites,
         handleDeleteInFavorites,
         setFavorites,
-        searchValue
+        searchValue,
+        getFavorites,
+        getItems,
+        setBasketItems
       }}
     >
       <div className={`${styles.wrapper} clear`}>

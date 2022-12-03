@@ -15,8 +15,8 @@ const Home = ({ isLoading }) => {
     searchFilter,
     handleAddInBasket,
     handleAddInFavorites,
-    handleDeleteInFavorites,
-    handleDeleteInBasket
+    // handleDeleteInFavorites,
+    // handleDeleteInBasket
   } = React.useContext(AppContext);
 
   const renderItems = () => {
@@ -27,14 +27,15 @@ const Home = ({ isLoading }) => {
         {...e}
         key={index}
         onAddInBasket={() => handleAddInBasket(e)}
-        onDeleteInBasket={() => handleDeleteInBasket(e)}
+        // onDeleteInBasket={() => handleDeleteInBasket(e)}
         onAddInFavorites={() => handleAddInFavorites(e)}
-        onDeleteInFavorites={() => handleDeleteInFavorites(e)}
+        onDeleteInFavorites={() => null}
         isLoading={isLoading}
       ></Card>
     ));
   };
 
+  
   return (
     <div className={styles.mainContent}>
       <img className={styles.banner} src={imgBanner} alt="banner" />
