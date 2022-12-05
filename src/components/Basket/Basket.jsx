@@ -7,13 +7,17 @@ import imgComplete from "../../img/complete-order.jpg";
 import BasketItem from "./BasketItem/BasketItem";
 import BasketInfo from "./BasketInfo/BasketInfo";
 import AppContext from "../../utils/data";
-// import {postAddBasketOrder} from "../../utils/api"
 import axios from "axios";
 const Basket = ({ closeBasket, basketDeleteItems }) => {
   const [isCheckoutComplete, setIsCheckoutComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { basketItems, setBasketItems } = useContext(AppContext);
+  const { basketItems, setBasketItems, handleDeleteInBasket } =
+    useContext(AppContext);
+
+  const delayRequest = (ms) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     function handleEscKeydown(evt) {
@@ -28,13 +32,24 @@ const Basket = ({ closeBasket, basketDeleteItems }) => {
   }, []);
 
   const SendCheckout = async () => {
-    const { data } = await axios.post(
-      "https://6373698a348e9472990bb74f.mockapi.io/Orders",
-      basketItems
-    );
-    setOrderId(data.id);
-    setBasketItems([]);
-    setIsCheckoutComplete(true);
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "https://6373698a348e9472990bb74f.mockapi.io/Orders",
+        { Orders: basketItems }
+      );
+      setOrderId(data.id);
+      for (let i = 0; i < basketItems.length; i++) {
+        const item = basketItems[i];
+        handleDeleteInBasket(item);
+        delayRequest(1000);
+      }
+      setBasketItems([]);
+      setIsCheckoutComplete(true);
+    } catch {
+      alert("Не удалось создать заказ");
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -93,10 +108,20 @@ const Basket = ({ closeBasket, basketDeleteItems }) => {
                 <b>4400 руб.</b>
               </li>
             </ul>
-
-            <button className={styles.checkoutButton} onClick={SendCheckout}>
-              Оформить заказ
-              <img src={imgArrow} alt="arrow"></img>
+            <button
+              disabled={isLoading}
+              className={styles.checkoutButton}
+              onClick={SendCheckout}
+            >
+              {isLoading ? (
+                <>
+                  <div className={styles.loader} />
+                  <p className={styles.loaderText}>Заказ оформляется...</p>
+                </>
+              ) : (
+                "Оформить заказ"
+              )}
+              {!isLoading && <img src={imgArrow} alt="arrow"></img>}
             </button>
           </div>
         )}

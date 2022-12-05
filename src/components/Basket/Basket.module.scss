@@ -92,10 +92,19 @@
       cursor: pointer;
       color: #ffffff;
       font-size: 16px;
+      transition: all 0.4s ease-in-out;
       &:hover {
         img {
           transform: translateX(4px);
         }
+      }
+      &:disabled{
+        background-color: lighten(#8c8e89, 14%);
+        &:hover{
+          background-color: lighten(#8c8e89, 14%);
+        cursor: default;
+        }
+
       }
       img {
         position: absolute;
@@ -105,10 +114,38 @@
       }
       &:hover {
         transition: all 0.2s ease-in-out;
-        background: lighten(#9dd558, 6%);
+        background: lighten(#9dd558, 8%);
       }
       &:active {
-        background: darken(#9dd558, 6%);
+        background: darken(#9dd558, 8%);
+      }
+      
+
+      .loader{
+        position: absolute;
+        top: 7px;
+        left: 95px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 5px dashed white;
+        animation: rotate 4s infinite linear;
+    }
+    .loaderText{
+      font-weight: 500;
+      margin: 0;
+      padding-left: 50px;
+    }
+    
+    @keyframes rotate {
+    
+        0% {
+          transform: rotate(0deg);
+        }
+      
+        100% {
+          transform: rotate(360deg);
+        }
       }
     }
   }

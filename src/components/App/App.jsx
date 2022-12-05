@@ -145,7 +145,6 @@ function App() {
         {basketOpen && (
           <Basket
             closeBasket={handleBasketClose}
-            basketDeleteItems={handleDeleteInBasket}
           />
         )}
         <Header openModal={handleBasketOpen} />
