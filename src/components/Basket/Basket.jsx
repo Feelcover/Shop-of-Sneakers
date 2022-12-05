@@ -13,13 +13,8 @@ const Basket = ({ closeBasket }) => {
   const [isCheckoutComplete, setIsCheckoutComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
   const { handleDeleteInBasket } = useContext(AppContext);
-  const {basketItems, setBasketItems, CartPrice} = usePrice();
-
-
-
-
+  const { basketItems, setBasketItems, CartPrice } = usePrice();
 
   useEffect(() => {
     function handleEscKeydown(evt) {
@@ -34,7 +29,7 @@ const Basket = ({ closeBasket }) => {
   }, []);
 
   const delayRequest = (ms) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+    new Promise((resolve) => setTimeout(resolve, ms));
 
   const SendCheckout = async () => {
     try {

@@ -5,14 +5,11 @@ import imgLogo from "../../img/logo.png";
 import imgCart from "../../img/cart.svg";
 import imgFav from "../../img/favorites.svg";
 import imgUser from "../../img/user.svg";
-import AppContext from "../../utils/data";
-import { usePrice } from "../../hooks/usePrice"
+import { usePrice } from "../../hooks/usePrice";
 
 const Header = ({ openModal }) => {
   const location = useLocation();
-  const {basketItems, setBasketItems, CartPrice} = usePrice();
-
-
+  const { CartPrice } = usePrice();
 
   return (
     <header

@@ -17,7 +17,7 @@ import {
   postDeleteInFavorites,
   allGet,
   getFavorites,
-  getItems
+  getItems,
 } from "../../utils/api";
 import Profile from "../../pages/Profile";
 
@@ -37,7 +37,6 @@ function App() {
     getData();
   }, []);
 
-
   const handleBasketOpen = () => {
     getBasketItems(setBasketItems);
     setBasketOpened(true);
@@ -55,30 +54,6 @@ function App() {
   };
 
 
-  
-
-  function getId(array, item) {
-    const value = array.filter(((e) => e.name === item.name));
-    let obj = value[0];
-    return obj.id
-  }
-
-  // Удаление из корзины через страницу
-
-  // const handleDeleteInBasketAtHome = (item) => {
-  //   if (isAdded(item.name)){
-  //   const id = getId(basketItems, item); 
-  //   console.log(id);
-  //   postDeleteBasketItems(id);
-  //   setBasketItems(basketItems.filter((baItem) => baItem.name !== item.name));
-  //   }
-
-  //   getBasketItems(setBasketItems)
-
-  // };
-
-  
-  // Удаление из корзины
   const handleDeleteInBasket = (item) => {
     postDeleteBasketItems(item.id);
     setBasketItems(basketItems.filter((baItem) => baItem.id !== item.id));
@@ -93,13 +68,19 @@ function App() {
     }
   };
 
+
+  const getId = (array, item) => {
+    const value = array.filter((e) => e.name === item.name);
+    let obj = value[0];
+    return obj.id;
+  }
   const handleDeleteInFavorites = (item) => {
-    if (isFavorite(item.name)){
-        const id = getId(favorites, item); 
-        console.log(id);
-        postDeleteInFavorites(item.id);
-        setFavorites(favorites.filter((favItem) => favItem.name !== item.name));
-        }
+    if (isFavorite(item.name)) {
+      const id = getId(favorites, item);
+      console.log(id);
+      postDeleteInFavorites(item.id);
+      setFavorites(favorites.filter((favItem) => favItem.name !== item.name));
+    }
   };
 
   const handleChangeSearchInput = (evt) => {
@@ -126,6 +107,7 @@ function App() {
         items,
         basketItems,
         favorites,
+        searchValue,
         isAdded,
         isFavorite,
         handleChangeSearchInput,
@@ -136,28 +118,23 @@ function App() {
         handleAddInFavorites,
         handleDeleteInFavorites,
         setFavorites,
-        searchValue,
         getFavorites,
         getItems,
-        setBasketItems
+        setBasketItems,
       }}
     >
       <div className={`${styles.wrapper} clear`}>
-        {basketOpen && (
-          <Basket
-            closeBasket={handleBasketClose}
-          />
-        )}
+        {basketOpen && <Basket closeBasket={handleBasketClose} />}
         <Header openModal={handleBasketOpen} />
         <Switch>
           <Route path="/" exact>
             <Home isLoading={isLoading} />
           </Route>
           <Route path="/Favorites" exact>
-            <Favorites></Favorites>
+            <Favorites />
           </Route>
           <Route path="/Profile" exact>
-            <Profile></Profile>
+            <Profile />
           </Route>
           <Route>
             <Error />
