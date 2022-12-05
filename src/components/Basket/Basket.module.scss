@@ -66,7 +66,7 @@
   .checkout {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 45px;
     .total {
       li {
         display: flex;
@@ -79,7 +79,11 @@
       }
     }
     span {
+      font-size: 20px;
       font-weight: 500;
+    }
+    b{
+      font-size: 18px;
     }
     .checkoutButton {
       position: relative;

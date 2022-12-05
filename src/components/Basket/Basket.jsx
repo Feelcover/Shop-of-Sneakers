@@ -8,16 +8,18 @@ import BasketItem from "./BasketItem/BasketItem";
 import BasketInfo from "./BasketInfo/BasketInfo";
 import AppContext from "../../utils/data";
 import axios from "axios";
-const Basket = ({ closeBasket, basketDeleteItems }) => {
+import { usePrice } from "../../hooks/usePrice";
+const Basket = ({ closeBasket }) => {
   const [isCheckoutComplete, setIsCheckoutComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { basketItems, setBasketItems, handleDeleteInBasket } =
-    useContext(AppContext);
+  const { handleDeleteInBasket } = useContext(AppContext);
+  const {basketItems, setBasketItems, CartPrice} = usePrice();
 
-  const delayRequest = (ms) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
+
+
+
 
   useEffect(() => {
     function handleEscKeydown(evt) {
@@ -30,6 +32,9 @@ const Basket = ({ closeBasket, basketDeleteItems }) => {
       document.removeEventListener("keydown", handleEscKeydown);
     };
   }, []);
+
+  const delayRequest = (ms) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
   const SendCheckout = async () => {
     try {
@@ -73,7 +78,7 @@ const Basket = ({ closeBasket, basketDeleteItems }) => {
                   image={e.image}
                   name={e.name}
                   price={e.price}
-                  deleteItem={() => basketDeleteItems(e)}
+                  deleteItem={() => handleDeleteInBasket(e)}
                 ></BasketItem>
               ))}
             </div>
@@ -100,12 +105,7 @@ const Basket = ({ closeBasket, basketDeleteItems }) => {
               <li>
                 <span>Итого:</span>
                 <div></div>
-                <b>17598 руб.</b>
-              </li>
-              <li>
-                <span>Налог 20%:</span>
-                <div></div>
-                <b>4400 руб.</b>
+                <b>{CartPrice} руб.</b>
               </li>
             </ul>
             <button

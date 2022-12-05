@@ -57,9 +57,6 @@ export const postDeleteBasketItems = async (id) => {
       console.log(error);
     });
 };
-export const deleteAllBasketItems = async () =>{
-  axios.put(`${Api.url}/Basket`, [])
-}
 
 export const postAddBasketOrder = async (items) => {
   await axios

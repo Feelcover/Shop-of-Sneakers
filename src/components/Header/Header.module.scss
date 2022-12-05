@@ -6,11 +6,25 @@ header {
   }
   span {
     opacity: 0.55;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      transform: scale(1.01);
+      opacity: 1;
+    }
   }
 
   .icons {
     background-color: #ffffff;
-    opacity: 0.8;
+    opacity: 0.6;
     color: #ffffff;
     border: none;
     padding: 0;
@@ -24,7 +38,19 @@ header {
       opacity: 1;
       transform: scale(1.1);
     }
-    
+  }
+  .currentIcons {
+    background-color: #ffffff;
+    opacity: 1;
+    scale: 1.2;
+    color: #ffffff;
+    border: none;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    transform: 0.2s ease-out;
   }
 
   .cartPrice {

@@ -19,6 +19,7 @@ import {
   getFavorites,
   getItems
 } from "../../utils/api";
+import Profile from "../../pages/Profile";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -154,6 +155,9 @@ function App() {
           </Route>
           <Route path="/Favorites" exact>
             <Favorites></Favorites>
+          </Route>
+          <Route path="/Profile" exact>
+            <Profile></Profile>
           </Route>
           <Route>
             <Error />
