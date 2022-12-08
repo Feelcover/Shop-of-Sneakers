@@ -1,12 +1,12 @@
 import { useEffect, useContext } from "react";
-import Card from "../components/Card/Card";
-import imgSearch from "../img/search.svg";
-import imgClose from "../img/close.png";
-import imgBanner from "../img/banner.jpg";
-import imgArrow from "../img/arrow.svg";
-import styles from "../components/App/App.module.scss";
+import Card from "../../components/Card/Card";
+import imgSearch from "../../img/search.svg";
+import imgClose from "../../img/close.png";
+import imgBanner from "../../img/banner.jpg";
+import imgArrow from "../../img/arrow.svg";
+import styles from "./Favorites.module.scss";
 import { Link } from "react-router-dom";
-import AppContext from "../utils/data";
+import AppContext from "../../utils/data";
 
 const Favorites = () => {
   const {

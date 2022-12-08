@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../components/App/App.module.scss";
-import imgArrow from "../img/arrow.svg";
+import styles from "./Error.module.scss";
+import imgArrow from "../../img/arrow.svg";
 import { Link } from "react-router-dom";
 
 const Error = () => {

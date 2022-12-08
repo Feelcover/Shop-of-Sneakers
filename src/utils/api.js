@@ -26,6 +26,17 @@ export const getBasketItems = async (setFunc) => {
     });
 };
 
+export const getOrders = async (setFunc) => {
+  await axios
+    .get(`${Api.url}/Orders`)
+    .then((res) => {
+      setFunc(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
 export const getFavorites = async (setFunc) => {
   await axios
     .get(`${Api.url}/Favorites`)

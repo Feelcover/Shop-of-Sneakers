@@ -1,6 +1,5 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import { useState } from "react";
 import styles from "./Card.module.scss";
 import imgUnliked from "../../img/unliked.svg";
 import imgLiked from "../../img/liked.svg";
@@ -16,7 +15,6 @@ const Card = ({
   onAddInBasket,
   onAddInFavorites,
   onDeleteInFavorites,
-  // onDeleteInBasket,
   isLoading,
 }) => {
   

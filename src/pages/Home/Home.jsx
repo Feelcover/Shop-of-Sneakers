@@ -1,10 +1,10 @@
 import React from "react";
-import Card from "../components/Card/Card";
-import imgSearch from "../img/search.svg";
-import imgClose from "../img/close.png";
-import imgBanner from "../img/banner.jpg";
-import styles from "../components/App/App.module.scss";
-import AppContext from "../utils/data";
+import Card from "../../components/Card/Card";
+import imgSearch from "../../img/search.svg";
+import imgClose from "../../img/close.png";
+import imgBanner from "../../img/banner.jpg";
+import styles from "./Home.module.scss";
+import AppContext from "../../utils/data";
 
 const Home = ({ isLoading }) => {
   const {
@@ -15,8 +15,6 @@ const Home = ({ isLoading }) => {
     searchFilter,
     handleAddInBasket,
     handleAddInFavorites,
-    // handleDeleteInFavorites,
-    // handleDeleteInBasket
   } = React.useContext(AppContext);
 
   const renderItems = () => {
@@ -27,7 +25,6 @@ const Home = ({ isLoading }) => {
         {...e}
         key={index}
         onAddInBasket={() => handleAddInBasket(e)}
-        // onDeleteInBasket={() => handleDeleteInBasket(e)}
         onAddInFavorites={() => handleAddInFavorites(e)}
         onDeleteInFavorites={() => null}
         isLoading={isLoading}

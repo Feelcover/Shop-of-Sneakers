@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  .ordersWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 160px;
+    max-height: 200px;
+    padding: 10px;
+    .imgOrder {
+      width: 70px;
+      height: 70px;
+    }
+    p {
+        font-size: 14px;
+        max-width: 100px;
+        margin: 0;
+    }
+  }
+}

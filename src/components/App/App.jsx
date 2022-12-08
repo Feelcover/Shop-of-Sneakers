@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import Header from "../Header/Header";
-import Home from "../../pages/Home";
-import Favorites from "../../pages/Favorites";
-import Error from "../../pages/Error";
+import Home from "../../pages/Home/Home";
+import Favorites from "../../pages/Favorites/Favorites";
+import Error from "../../pages/Error/Error";
 // import { data } from "../../utils/data";
 import styles from "./App.module.scss";
 import AppContext from "../../utils/data";
@@ -19,7 +19,7 @@ import {
   getFavorites,
   getItems,
 } from "../../utils/api";
-import Profile from "../../pages/Profile";
+import Profile from "../../pages/Profile/Profile";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -134,7 +134,7 @@ function App() {
             <Favorites />
           </Route>
           <Route path="/Profile" exact>
-            <Profile />
+            <Profile isLoading={isLoading} />
           </Route>
           <Route>
             <Error />

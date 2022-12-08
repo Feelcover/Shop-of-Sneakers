@@ -42,7 +42,7 @@ const Basket = ({ closeBasket }) => {
       for (let i = 0; i < basketItems.length; i++) {
         const item = basketItems[i];
         handleDeleteInBasket(item);
-        delayRequest(1000);
+        delayRequest(200);
       }
       setBasketItems([]);
       setIsCheckoutComplete(true);
