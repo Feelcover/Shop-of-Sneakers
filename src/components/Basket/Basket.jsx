@@ -28,6 +28,10 @@ const Basket = ({ closeBasket }) => {
     };
   }, []);
 
+  let now = new Date()
+  let date = now.toLocaleString();
+    console.log(date);
+
   const delayRequest = (ms) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -36,7 +40,7 @@ const Basket = ({ closeBasket }) => {
       setIsLoading(true);
       const { data } = await axios.post(
         "https://6373698a348e9472990bb74f.mockapi.io/Orders",
-        { Orders: basketItems }
+        { Orders: basketItems, Time:date }
       );
       setOrderId(data.id);
       for (let i = 0; i < basketItems.length; i++) {

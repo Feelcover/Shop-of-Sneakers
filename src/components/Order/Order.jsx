@@ -7,7 +7,7 @@ const Order = ({ Orders }) => {
       {Orders.map((e, index) => (
         <div key={index} className={styles.ordersWrapper}>
           <img className={styles.imgOrder} src={e.image} />
-          <p>{e.name}</p>
+          <p>{e.name.slice(17,60)}</p>
         </div>
       ))}
     </div>
