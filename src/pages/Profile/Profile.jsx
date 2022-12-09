@@ -17,7 +17,6 @@ const Profile = () => {
   }, []);
 
   const handleDeleteInOrders = (id) => {
-    console.log(id);
     postDeleteBasketOrder(id);
     setOrders(orders.filter((orderItem) => orderItem.id !== id));
   };
