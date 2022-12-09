@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Shop-of-Sneakers/static/css/main.0e2ba1b1.css",
-    "main.js": "/Shop-of-Sneakers/static/js/main.2ab84d03.js",
+    "main.css": "/Shop-of-Sneakers/static/css/main.3cb4fcea.css",
+    "main.js": "/Shop-of-Sneakers/static/js/main.68cf9020.js",
     "static/media/banner.jpg": "/Shop-of-Sneakers/static/media/banner.1b3b5ad623680af9ef4c.jpg",
     "static/media/complete-order.jpg": "/Shop-of-Sneakers/static/media/complete-order.b997b2a143b197da5f98.jpg",
     "static/media/empty-cart.jpg": "/Shop-of-Sneakers/static/media/empty-cart.0366979184a44172f310.jpg",
@@ -16,11 +16,11 @@
     "static/media/btn-remove.svg": "/Shop-of-Sneakers/static/media/btn-remove.b1fef0aa93fbf25374f4991d23f900d8.svg",
     "static/media/plus.svg": "/Shop-of-Sneakers/static/media/plus.8d78c31ac79b736d84e4d56285eb93cb.svg",
     "static/media/arrow.svg": "/Shop-of-Sneakers/static/media/arrow.fc3222511ec5a224a4abf3bbf4c2566f.svg",
-    "main.0e2ba1b1.css.map": "/Shop-of-Sneakers/static/css/main.0e2ba1b1.css.map",
-    "main.2ab84d03.js.map": "/Shop-of-Sneakers/static/js/main.2ab84d03.js.map"
+    "main.3cb4fcea.css.map": "/Shop-of-Sneakers/static/css/main.3cb4fcea.css.map",
+    "main.68cf9020.js.map": "/Shop-of-Sneakers/static/js/main.68cf9020.js.map"
   },
   "entrypoints": [
-    "static/css/main.0e2ba1b1.css",
-    "static/js/main.2ab84d03.js"
+    "static/css/main.3cb4fcea.css",
+    "static/js/main.68cf9020.js"
   ]
 }
