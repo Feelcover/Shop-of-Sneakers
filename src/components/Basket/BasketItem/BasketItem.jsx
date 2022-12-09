@@ -1,10 +1,8 @@
 import React from "react";
-import imgRemove from "../../../img/btn-remove.svg"
-import styles from "./BasketItem.module.scss"
+import imgRemove from "../../../img/btn-remove.svg";
+import styles from "./BasketItem.module.scss";
 
-
-const BasketItem = ({image, name, price, deleteItem}) => {
-
+const BasketItem = ({ image, name, price, deleteItem }) => {
   return (
     <div className={styles.basketItem}>
       <img

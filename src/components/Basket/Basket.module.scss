@@ -82,7 +82,7 @@
       font-size: 20px;
       font-weight: 500;
     }
-    b{
+    b {
       font-size: 18px;
     }
     .checkoutButton {
@@ -102,13 +102,12 @@
           transform: translateX(4px);
         }
       }
-      &:disabled{
+      &:disabled {
         background-color: lighten(#8c8e89, 14%);
-        &:hover{
+        &:hover {
           background-color: lighten(#8c8e89, 14%);
-        cursor: default;
+          cursor: default;
         }
-
       }
       img {
         position: absolute;
@@ -123,9 +122,8 @@
       &:active {
         background: darken(#9dd558, 8%);
       }
-      
 
-      .loader{
+      .loader {
         position: absolute;
         top: 7px;
         left: 95px;
@@ -134,19 +132,18 @@
         border-radius: 50%;
         border: 5px dashed white;
         animation: rotate 4s infinite linear;
-    }
-    .loaderText{
-      font-weight: 500;
-      margin: 0;
-      padding-left: 50px;
-    }
-    
-    @keyframes rotate {
-    
+      }
+      .loaderText {
+        font-weight: 500;
+        margin: 0;
+        padding-left: 50px;
+      }
+
+      @keyframes rotate {
         0% {
           transform: rotate(0deg);
         }
-      
+
         100% {
           transform: rotate(360deg);
         }

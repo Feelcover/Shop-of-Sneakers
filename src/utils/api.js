@@ -26,16 +26,6 @@ export const getBasketItems = async (setFunc) => {
     });
 };
 
-export const getOrders = async (setFunc) => {
-  await axios
-    .get(`${Api.url}/Orders`)
-    .then((res) => {
-      setFunc(res.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
 
 export const getFavorites = async (setFunc) => {
   await axios
@@ -69,9 +59,32 @@ export const postDeleteBasketItems = async (id) => {
     });
 };
 
+
+
+
+export const getOrders = async (setFunc) => {
+  await axios
+    .get(`${Api.url}/Orders`)
+    .then((res) => {
+      setFunc(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
 export const postAddBasketOrder = async (items) => {
   await axios
     .post(`${Api.url}/Orders`, items)
+    .then(function (res) {
+      console.log(res.statusText);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+export const postDeleteBasketOrder = async (id) => {
+  await axios
+    .delete(`${Api.url}/Orders/${id}`)
     .then(function (res) {
       console.log(res.statusText);
     })
@@ -107,7 +120,7 @@ export const postDeleteInFavorites = async (id) => {
 };
 
 export const allGet = async (setBasketItems, setFavorites, setItems) => {
-  await getBasketItems(setBasketItems);
-  await getFavorites(setFavorites);
-  await getItems(setItems);
+    await getBasketItems(setBasketItems);
+    await getFavorites(setFavorites);
+    await getItems(setItems);
 };

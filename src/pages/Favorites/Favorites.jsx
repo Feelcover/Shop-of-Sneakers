@@ -20,7 +20,7 @@ const Favorites = () => {
     handleDeleteInFavorites,
     handleDeleteInBasket,
     setFavorites,
-    getFavorites
+    getFavorites,
   } = useContext(AppContext);
 
   useEffect(() => {

@@ -6,7 +6,6 @@ import Header from "../Header/Header";
 import Home from "../../pages/Home/Home";
 import Favorites from "../../pages/Favorites/Favorites";
 import Error from "../../pages/Error/Error";
-// import { data } from "../../utils/data";
 import styles from "./App.module.scss";
 import AppContext from "../../utils/data";
 import {
@@ -134,7 +133,7 @@ function App() {
             <Favorites />
           </Route>
           <Route path="/Profile" exact>
-            <Profile isLoading={isLoading} />
+            <Profile/>
           </Route>
           <Route>
             <Error />

@@ -1,11 +1,10 @@
-import React from "react";
+import { useContext } from "react";
 import ContentLoader from "react-content-loader";
 import styles from "./Card.module.scss";
 import imgUnliked from "../../img/unliked.svg";
 import imgLiked from "../../img/liked.svg";
 import imgPlus from "../../img/plus.svg";
 import imgChecked from "../../img/btn-checked.svg";
-import { useContext } from "react";
 import AppContext from "../../utils/data";
 
 const Card = ({
@@ -17,22 +16,20 @@ const Card = ({
   onDeleteInFavorites,
   isLoading,
 }) => {
-  
-  const {isAdded, isFavorite} = useContext(AppContext);
+  const { isAdded, isFavorite } = useContext(AppContext);
 
   const handleAddClick = () => {
     if (!isAdded(name)) {
       onAddInBasket();
-    } 
+    }
   };
 
   const handleLikedClick = () => {
     if (!isFavorite(name)) {
       onAddInFavorites();
-    } 
+    }
     onDeleteInFavorites();
   };
-
 
   return (
     <div className={styles.card}>
@@ -69,7 +66,9 @@ const Card = ({
 
             <button className={styles.buttonAdd} onClick={handleAddClick}>
               <img
-                className={isAdded(name) ? styles.buttonAddedImg : styles.buttonAddImg}
+                className={
+                  isAdded(name) ? styles.buttonAddedImg : styles.buttonAddImg
+                }
                 width={11}
                 height={11}
                 src={isAdded(name) ? imgChecked : imgPlus}
