@@ -43,8 +43,8 @@ const Basket = ({ closeBasket }) => {
       setOrderId(data.id);
       for (let i = 0; i < basketItems.length; i++) {
         const item = basketItems[i];
-        handleDeleteInBasket(item);
-        delayRequest(200);
+        await handleDeleteInBasket(item);
+        await  delayRequest(250);
       }
       setBasketItems([]);
       setIsCheckoutComplete(true);
@@ -67,7 +67,7 @@ const Basket = ({ closeBasket }) => {
               <img width={40} height={40} src={imgClose} alt="close"></img>
             </button>
           </h2>
-          {basketItems.length !== 0 ? (
+          {basketItems.length !== 0 && setIsLoading ? (
             <div className={styles.basketItems}>
               {basketItems.map((e) => (
                 <BasketItem
