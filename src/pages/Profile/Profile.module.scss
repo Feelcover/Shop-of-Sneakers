@@ -39,7 +39,7 @@
     justify-content: space-between;
     margin-bottom: 40px;
     margin-top: 30px;
-    max-height: 690px;
+    max-height: 670px;
 
     @media screen and (max-width: 550px) {
       flex-direction: column;
@@ -52,7 +52,7 @@
 }
 
 .cardContainer {
-  max-height: 690px;
+  max-height: 630px;
   box-sizing: border-box;
   overflow-y: auto;
   justify-content: center;
