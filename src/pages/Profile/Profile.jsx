@@ -27,10 +27,11 @@ const Profile = () => {
       <div className={styles.mainContainer}>
         <h1>Ваши заказы</h1>
         <div className={styles.cardContainer}>
-          {orders.map(({ Orders, id, Time }) => (
+          {orders.map(({ Orders, id, Time, Total }) => (
             <div key={id} className={styles.orderWrapper}>
               <h2>Заказ №{id}</h2>
-              <p className={styles.orderTime}>{Time}</p>
+              <p className={styles.orderInfo}>{Total} руб.</p>
+              <p className={styles.orderInfo}>{Time}</p>
               <Order id={id} Orders={Orders} />
               <img
                 className={styles.orderDelete}

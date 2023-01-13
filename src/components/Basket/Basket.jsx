@@ -38,7 +38,7 @@ const Basket = ({ closeBasket }) => {
       let now = new Date().toLocaleString()
       const { data } = await axios.post(
         "https://6373698a348e9472990bb74f.mockapi.io/Orders",
-        { Orders: basketItems, Time:now }
+        { Orders: basketItems, Time:now, Total: CartPrice}
       );
       setOrderId(data.id);
       for (let i = 0; i < basketItems.length; i++) {
