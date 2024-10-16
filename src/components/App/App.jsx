@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Basket from "../Basket/Basket";
 import Header from "../Header/Header";
 import Home from "../../pages/Home/Home";
@@ -52,7 +52,6 @@ function App() {
     }
   };
 
-
   const handleDeleteInBasket = (item) => {
     postDeleteBasketItems(item.id);
     setBasketItems(basketItems.filter((baItem) => baItem.id !== item.id));
@@ -67,12 +66,11 @@ function App() {
     }
   };
 
-
   const getId = (array, item) => {
     const value = array.filter((e) => e.name === item.name);
     let obj = value[0];
     return obj.id;
-  }
+  };
   const handleDeleteInFavorites = (item) => {
     if (isFavorite(item.name)) {
       const id = getId(favorites, item);
@@ -125,20 +123,12 @@ function App() {
       <div className={`${styles.wrapper} clear`}>
         {basketOpen && <Basket closeBasket={handleBasketClose} />}
         <Header openModal={handleBasketOpen} />
-        <Switch>
-          <Route path="/" exact>
-            <Home isLoading={isLoading} />
-          </Route>
-          <Route path="/Favorites" exact>
-            <Favorites />
-          </Route>
-          <Route path="/Profile" exact>
-            <Profile/>
-          </Route>
-          <Route>
-            <Error />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home isLoading={isLoading} />} />
+          <Route path="/Favorites" element={<Favorites />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
       </div>
     </AppContext.Provider>
   );
